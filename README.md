@@ -71,7 +71,10 @@ This is a binary signal for whether a relevant item appears in the top-k retriev
 
 Formula:
 
-Hit@k = 1 if a relevant result appears in ranks 1..k; otherwise 0.
+$Hit@k = \begin{cases}
+1 & \text{if a relevant result appears in ranks } 1..k \\
+0 & \text{otherwise}
+\end{cases}$
 
 In this project the hit check uses either:
 
@@ -85,7 +88,7 @@ This measures how early the first relevant result appears.
 
 Formula:
 
-MRR@k = 1 / rank_first_relevant
+$MRR@k = \frac{1}{rank_{first\_relevant}}$
 
 If no relevant result is found, it is 0. This rewards retrieval systems that rank useful documents earlier.
 
