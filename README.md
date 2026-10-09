@@ -65,16 +65,13 @@ This structure makes it easy to evaluate both fact-based and refusal-sensitive c
 
 These are implemented in `rag_eval/ir_metrics.py` and work without a judge model.
 
-#### Hit@k
+#### Hit at k
 
 This is a binary signal for whether a relevant item appears in the top-k retrieved results.
 
 Formula:
 
-$Hit@k = \begin{cases}
-1 & \text{if a relevant result appears in ranks } 1..k \\
-0 & \text{otherwise}
-\end{cases}$
+Hit@k = 1 if a relevant result appears in ranks 1..k; otherwise 0.
 
 In this project the hit check uses either:
 
@@ -82,13 +79,13 @@ In this project the hit check uses either:
 - the expected context snippets / expected keywords, or
 - a token coverage threshold approximating semantic overlap.
 
-#### MRR@k (Mean Reciprocal Rank)
+#### MRR at k (Mean Reciprocal Rank)
 
 This measures how early the first relevant result appears.
 
 Formula:
 
-$MRR@k = \frac{1}{rank_{first\_relevant}}$
+MRR@k = 1 / rank_first_relevant
 
 If no relevant result is found, it is 0. This rewards retrieval systems that rank useful documents earlier.
 
@@ -98,13 +95,13 @@ This measures how much of the expected evidence is present in the retrieved cont
 
 Formula:
 
-$ContextRecall = \frac{1}{|R|}\sum_{r \in R} \frac{|tokens(r) \cap tokens(C)|}{|tokens(r)|}$
+ContextRecall = average over expected references of (overlap between reference tokens and retrieved tokens) / (reference tokens)
 
 where:
 
-- $R$ = expected reference snippets
-- $C$ = retrieved corpus text
-- `tokens(...)` is the normalized token set
+- R = expected reference snippets
+- C = retrieved corpus text
+- tokens(...) is the normalized token set
 
 If there are expected keywords instead of context passages, this falls back to a hit-style indicator.
 
@@ -114,18 +111,15 @@ This checks how many expected keywords are present in the retrieved output.
 
 Formula:
 
-$KeywordRecall = \frac{|K_{matched}|}{|K|}$
+KeywordRecall = matched_keywords / total_keywords
 
-where $K$ is the set of expected keywords and $K_{matched}$ are those found in the retrieved text.
+where K is the set of expected keywords and matched_keywords are those found in the retrieved text.
 
 #### Refusal accuracy
 
 For `unanswerable` cases,
 
-$RefusalAccuracy = \begin{cases}
-1 & \text{if the model refuses appropriately} \\
-0 & \text{otherwise}
-\end{cases}$
+RefusalAccuracy = 1 if the model refuses appropriately; otherwise 0.
 
 The code accepts common refusal markers such as “I do not know”, “I can’t answer”, and “not contained”.
 
