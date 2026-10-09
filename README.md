@@ -71,8 +71,7 @@ This is a binary signal for whether a relevant item appears in the top-k retriev
 
 Formula:
 
-$Hit@k = \begin{cases} 1 & \text{if a relevant result appears in ranks } 1..k \\ 0 & \text{otherwise}
-\end{cases}$
+$Hit@k = \begin{cases} 1 & \text{if a relevant result appears in ranks } 1..k \\ 0 & \text{otherwise} \end{cases}$
 
 In this project the hit check uses either:
 
