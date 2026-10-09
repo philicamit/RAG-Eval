@@ -1,0 +1,10 @@
+﻿# Minimal runtime dependencies for the standalone evaluation package
+langchain
+langchain-core
+langchain-community
+langchain-openai
+langchain-text-splitters
+python-dotenv
+pytest
+deepeval
+numpy
